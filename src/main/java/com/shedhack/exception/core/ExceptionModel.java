@@ -25,7 +25,7 @@ public class ExceptionModel {
 
         private static final Pattern UUID_PATTERN = Pattern.compile("[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}");
 
-        private static final String METADATA = "core-exception-model";
+        private static final String METADATA = "exception-core-model";
 
         ExceptionModel model;
 
@@ -62,6 +62,9 @@ public class ExceptionModel {
                 withBusinessCodes(exception.getBusinessCodes());
             }
 
+            if(!exception.getParams().isEmpty()) {
+                withParams(exception.getParams());
+            }
         }
 
         public Builder withExceptionId(String exceptionId) {
@@ -161,8 +164,16 @@ public class ExceptionModel {
 
             while (throwable != null) {
 
-                chain.add(new ExceptionChainModel(findCorrelation(throwable.getMessage()), throwable.getMessage()));
+                String correlationId = null;
 
+                if(throwable instanceof BusinessException) {
+                    correlationId = ((BusinessException)throwable).getExceptionId();
+                }
+                else {
+                    correlationId = findCorrelation(throwable.getMessage());
+                }
+
+                chain.add(new ExceptionChainModel(correlationId, throwable.getMessage()));
                 throwable = throwable.getCause();
             }
 
@@ -178,6 +189,7 @@ public class ExceptionModel {
                     return matcher.group();
                 }
             }
+
             return null;
         }
 
