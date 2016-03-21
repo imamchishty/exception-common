@@ -4,3 +4,16 @@
 
 Common lib for exceptions 
 
+## Introduction
+
+## Business Codes
+
+
+## Exception Model
+
+
+## Fluent API
+
+
+
+
