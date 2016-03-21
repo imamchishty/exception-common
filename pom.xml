@@ -109,6 +109,8 @@
         </plugins>
     </build>
 
+    <!-- Profiles -->
+    
     <profiles>
         <profile>
             <id>release</id>
