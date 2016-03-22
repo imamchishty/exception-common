@@ -6,7 +6,7 @@
 
     <groupId>com.shedhack.exception</groupId>
     <artifactId>exception-core</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <description>Generic Exception Library to be used with HTTP services.</description>
     <url>https://github.com/imamchishty/exception-core</url>
