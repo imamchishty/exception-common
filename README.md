@@ -1,7 +1,9 @@
 # exception-core
 
-[![Build Status](https://travis-ci.org/imamchishty/exception-core.svg?branch=master "Travis CI")](https://travis-ci.org/imamchishty/exception-core) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.shedhack.exception/exception-core/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.shedhack.exception/exception-core) [![Coverage Status](https://coveralls.io/repos/imamchishty/exception-core/badge.svg?branch=master)](https://coveralls.io/r/jimamchishty/exception-core?branch=master)
+[![Build Status](https://travis-ci.org/imamchishty/exception-core.svg?branch=master "Travis CI")](https://travis-ci.org/imamchishty/exception-core) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.shedhack.exception/exception-core/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.shedhack.exception/exception-core) 
 
+
+[![Code Climate](https://img.shields.io/codeclimate/coverage/github/imamchishty/exception-core.svg)]()
 
 ## Introduction
 
