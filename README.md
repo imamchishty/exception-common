@@ -2,9 +2,6 @@
 
 [![Build Status](https://travis-ci.org/imamchishty/exception-core.svg?branch=master "Travis CI")](https://travis-ci.org/imamchishty/exception-core) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.shedhack.exception/exception-core/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.shedhack.exception/exception-core) 
 
-
-[![Code Climate](https://img.shields.io/codeclimate/coverage/github/imamchishty/exception-core.svg)]()
-
 ## Introduction
 
 This library helps in managing Java Runtime Exceptions. It's primary focus is to really make it simple to create and manage exceptions.
