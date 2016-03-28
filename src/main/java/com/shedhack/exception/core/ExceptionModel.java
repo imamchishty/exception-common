@@ -11,6 +11,26 @@ import java.util.regex.Pattern;
  *
  * The client can use the exception Id to map the exception to the appropriate log file instance for the
  * fuller details (if permitted by service).
+ *
+ * Properties that are set include:
+ *
+ * - RequestId : unique HTTP request ID, this could be set by the HTTP server.
+ * - ExceptionId: unique exception ID, can be used to easily find the exception in logs.
+ * - Session Id: HTTP session Id.
+ * - ExceptionChainModel (collection) : a collection of exception chain models.
+ *      Contains correlation Ids so that external service failures can be traced using this ID.
+ * - Http status code
+ * - Http status desc
+ * - Help Link: HTTP resource that can detail business codes/http codes.
+ * - Message: exception message.
+ * - Exception Class: root exception class that was caught and wrapped.
+ * - Path: the http resource that was targeted when exception was thrown.
+ * - Application name
+ * - Meta-data: contains any useful meta-data that was available and added.
+ * - Business Codes (collection): {@link com.shedhack.exception.core.BusinessException}
+ * - Params: original params
+ * - DateTime: date/time when problem occurred.
+ *
  * </p>
  *
  * @author imamchishty
@@ -65,10 +85,19 @@ public class ExceptionModel {
             if(!exception.getParams().isEmpty()) {
                 withParams(exception.getParams());
             }
+
+            if(!exception.getRequestId().isEmpty()) {
+                withRequestId(exception.getRequestId());
+            }
         }
 
         public Builder withExceptionId(String exceptionId) {
             model.exceptionId = exceptionId;
+            return this;
+        }
+
+        public Builder withRequestId(String requestId) {
+            model.requestId = requestId;
             return this;
         }
 
@@ -221,7 +250,7 @@ public class ExceptionModel {
     // Class properties
     // ----------------
 
-    private String exceptionId, httpStatusDescription,
+    private String requestId, exceptionId, httpStatusDescription,
             path, sessionId, helpLink, message, exceptionClass,
             applicationName, metadata;
 
@@ -350,23 +379,32 @@ public class ExceptionModel {
         this.metadata = metadata;
     }
 
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
     @Override
     public String toString() {
-        return "HttpExceptionModel{" +
-                " applicationName='" + applicationName + '\'' +
+        return "ExceptionModel{" +
+                "requestId='" + requestId + '\'' +
                 ", exceptionId='" + exceptionId + '\'' +
-                ", businessCodes=" + businessCodes +
-                ", message='" + message + '\'' +
-                ", exceptionClass='" + exceptionClass + '\'' +
-                ", dateTime=" + dateTime +
-                ", path='" + path + '\'' +
-                ", params=" + params +
-                ", httpStatusCode=" + httpStatusCode +
                 ", httpStatusDescription='" + httpStatusDescription + '\'' +
+                ", path='" + path + '\'' +
                 ", sessionId='" + sessionId + '\'' +
                 ", helpLink='" + helpLink + '\'' +
+                ", message='" + message + '\'' +
+                ", exceptionClass='" + exceptionClass + '\'' +
+                ", applicationName='" + applicationName + '\'' +
+                ", metadata='" + metadata + '\'' +
+                ", httpStatusCode=" + httpStatusCode +
+                ", params=" + params +
+                ", businessCodes=" + businessCodes +
                 ", exceptionChain=" + exceptionChain +
-                ", metadata=" + metadata +
+                ", dateTime=" + dateTime +
                 '}';
     }
 
@@ -392,8 +430,10 @@ public class ExceptionModel {
         if (httpStatusDescription != null ? !httpStatusDescription.equals(that.httpStatusDescription) : that.httpStatusDescription != null)
             return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
+        if (metadata != null ? !metadata.equals(that.metadata) : that.metadata != null) return false;
         if (params != null ? !params.equals(that.params) : that.params != null) return false;
         if (path != null ? !path.equals(that.path) : that.path != null) return false;
+        if (requestId != null ? !requestId.equals(that.requestId) : that.requestId != null) return false;
         if (sessionId != null ? !sessionId.equals(that.sessionId) : that.sessionId != null) return false;
 
         return true;
@@ -401,7 +441,8 @@ public class ExceptionModel {
 
     @Override
     public int hashCode() {
-        int result = exceptionId != null ? exceptionId.hashCode() : 0;
+        int result = requestId != null ? requestId.hashCode() : 0;
+        result = 31 * result + (exceptionId != null ? exceptionId.hashCode() : 0);
         result = 31 * result + (httpStatusDescription != null ? httpStatusDescription.hashCode() : 0);
         result = 31 * result + (path != null ? path.hashCode() : 0);
         result = 31 * result + (sessionId != null ? sessionId.hashCode() : 0);
@@ -409,6 +450,7 @@ public class ExceptionModel {
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (exceptionClass != null ? exceptionClass.hashCode() : 0);
         result = 31 * result + (applicationName != null ? applicationName.hashCode() : 0);
+        result = 31 * result + (metadata != null ? metadata.hashCode() : 0);
         result = 31 * result + httpStatusCode;
         result = 31 * result + (params != null ? params.hashCode() : 0);
         result = 31 * result + (businessCodes != null ? businessCodes.hashCode() : 0);

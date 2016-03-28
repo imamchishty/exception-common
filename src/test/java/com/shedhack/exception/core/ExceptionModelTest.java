@@ -59,6 +59,7 @@ public class ExceptionModelTest {
         assertFalse(model.getExceptionChain().isEmpty());
         assertTrue(model.getParams().containsKey("user"));
         assertEquals(exception.getParams().get("user"), model.getParams().get("user"));
+        assertEquals("ABCD12335", exception.getRequestId());
     }
 
 
@@ -93,7 +94,6 @@ public class ExceptionModelTest {
         assertNotNull(model.getExceptionId());
         assertEquals(model.getExceptionChain().get(0).getCorrelationId(), "d99306bc-4b04-4a34-b7e7-f5554383f570");
         assertEquals(model.getExceptionChain().get(0).getMessage(), "Something went wrong here is the exception Id d99306bc-4b04-4a34-b7e7-f5554383f570");
-
     }
 
     @Test
@@ -125,7 +125,7 @@ public class ExceptionModelTest {
             builder = new BusinessException.Builder(message);
         }
 
-        builder.generateId().withBusinessCode(code).withParam("user", "imam");
+        builder.generateId().withBusinessCode(code).withParam("user", "imam").withRequestId("ABCD12335");
 
         return builder.build();
     }

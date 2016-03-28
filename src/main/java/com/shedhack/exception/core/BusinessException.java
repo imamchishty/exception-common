@@ -62,6 +62,11 @@ public class BusinessException extends RuntimeException {
             return this;
         }
 
+        public Builder withRequestId(String id) {
+            exception.requestId = id;
+            return this;
+        }
+
         public BusinessException build() {
             return exception;
         }
@@ -87,7 +92,7 @@ public class BusinessException extends RuntimeException {
     // Class properties
     // ----------------
 
-    private String exceptionId, correlationId;
+    private String requestId, exceptionId, correlationId;
 
     private Map<String, Object> params = new HashMap<String, Object>();
 
@@ -144,10 +149,19 @@ public class BusinessException extends RuntimeException {
         this.httpCode = httpCode;
     }
 
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
     @Override
     public String toString() {
         return "BusinessException{" +
-                "exceptionId='" + exceptionId + '\'' +
+                "requestId='" + requestId + '\'' +
+                ", exceptionId='" + exceptionId + '\'' +
                 ", correlationId='" + correlationId + '\'' +
                 ", params=" + params +
                 ", businessCodes=" + businessCodes +
