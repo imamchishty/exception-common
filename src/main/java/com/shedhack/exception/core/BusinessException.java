@@ -3,9 +3,11 @@ package com.shedhack.exception.core;
 import java.util.*;
 
 /**
- * Generic Service Exception.
- * Please set the exception Id accordingly as this can be used to link client problems to lig files.
- * The exception Id is generated using {@link java.util.UUID}.
+ * Generic Exception.
+ * Please set the exception Id accordingly as this can be used to link client problems to log files/database.
+ *
+ * Please note that upon construction an exception Id will be generated using {@link java.util.UUID}.
+ * This can be changed using the <code>withExceptionId(String id)</code> method.
  * Setting the correlation Id maybe useful when calling external services and to map local exceptions with external ones.
  *
  * @author imamchishty
@@ -22,18 +24,28 @@ public class BusinessException extends RuntimeException {
 
         public Builder(String message) {
             exception = new BusinessException(message);
+            generateId();
         }
 
         public Builder(Exception ex) {
             exception = new BusinessException(ex.getMessage(), ex);
+            generateId();
         }
 
         public Builder(String message, Exception ex) {
             exception = new BusinessException(message, ex);
+            generateId();
         }
 
         public Builder generateId() {
             exception.exceptionId = UUID.randomUUID().toString();
+            return this;
+        }
+
+        public Builder withExceptionId(String id) {
+            if(!Utils.isEmptyOrNull(id)) {
+                exception.exceptionId = id;
+            }
             return this;
         }
 

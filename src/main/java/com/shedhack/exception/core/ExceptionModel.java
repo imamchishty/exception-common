@@ -47,11 +47,7 @@ public class ExceptionModel {
 
         private static final String METADATA = "exception-core-model";
 
-        ExceptionModel model;
-
-        public Builder() {
-            model = new ExceptionModel();
-        }
+        ExceptionModel model = new ExceptionModel();
 
         public Builder(String applicationName, Exception exception) {
 
@@ -72,21 +68,21 @@ public class ExceptionModel {
             model = new ExceptionModel();
 
             withApplicationName(applicationName)
-                .withExceptionId(exception.getExceptionId() != null ? exception.getExceptionId() : UUID.randomUUID().toString())
+                .withExceptionId(Utils.isEmptyOrNull(exception.getExceptionId()) ? UUID.randomUUID().toString() :  exception.getExceptionId())
                     .withException(exception.getClass().getName(), exception.getMessage() != null ? exception.getMessage() : DEFAULT_ERROR_MESSAGE)
                         .withDateTime(new Date())
                             .withExceptionChain(findExceptionChain(exception))
                                 .withMetaData(METADATA);
 
-            if(!exception.getBusinessCodes().isEmpty()) {
+            if(!Utils.isCollectionNullOrEmpty(exception.getBusinessCodes())) {
                 withBusinessCodes(exception.getBusinessCodes());
             }
 
-            if(!exception.getParams().isEmpty()) {
+            if(!Utils.isMapNullOrEmpty(exception.getParams())) {
                 withParams(exception.getParams());
             }
 
-            if(!exception.getRequestId().isEmpty()) {
+            if(!Utils.isEmptyOrNull(exception.getRequestId())) {
                 withRequestId(exception.getRequestId());
             }
         }
@@ -211,7 +207,7 @@ public class ExceptionModel {
 
         private static String findCorrelation(String message) {
 
-            if(message != null) {
+            if(!Utils.isEmptyOrNull(message)) {
                 Matcher matcher = UUID_PATTERN.matcher(message);
 
                 while (matcher.find()) {
@@ -234,10 +230,6 @@ public class ExceptionModel {
 
     public static Builder builder(String applicationName, BusinessException ex) {
         return new Builder(applicationName, ex);
-    }
-
-    public static Builder builder() {
-        return new Builder();
     }
 
     // ----------------

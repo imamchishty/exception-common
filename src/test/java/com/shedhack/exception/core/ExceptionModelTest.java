@@ -11,22 +11,6 @@ import static org.junit.Assert.assertEquals;
 public class ExceptionModelTest {
 
     @Test
-    public void should_create_a_business_exception() {
-
-        // Arrange & Act
-        BusinessException exception = buildException(FooBusinessCode.FOO_01, null, "Failed to log the user in");
-
-        // Assert
-        assertNotNull(exception);
-        assertEquals("Failed to log the user in", exception.getMessage());
-        assertEquals("imam", exception.getParams().get("user"));
-        assertEquals(FooBusinessCode.FOO_01, exception.getBusinessCodes().get(0));
-        assertNotNull(exception.getExceptionId());
-        assertNull(exception.getCorrelationId());
-        assertNull(exception.getHttpCode());
-    }
-
-    @Test
     public void should_create_exception_model_from_business_exception() {
 
         // Arrange
