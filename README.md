@@ -98,6 +98,8 @@ You may have guessed that it contains several of the properties that are provide
 
 - __DateTime__: date/time when problem occurred.
 
+- __Context map__: map allowing for any other useful details.
+
 ## Fluent API
 
 The example below shows how easy it is to build the ExceptionModel:
