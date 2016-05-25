@@ -4,7 +4,7 @@
 
     <groupId>com.shedhack.exception</groupId>
     <artifactId>exception-core</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6-SNAPSHOT</version>
 
     <description>Generic Exception Library to be used with HTTP services.</description>
     <url>https://github.com/imamchishty/exception-core</url>
@@ -33,7 +33,7 @@
         <connection>scm:git:git@github.com:imamchishty/exception-core.git</connection>
         <developerConnection>scm:git:git@github.com:imamchishty/exception-core.git</developerConnection>
         <url>git@github.com:imamchishty/exception-core.git</url>
-        <tag>exception-core-1.0.5</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
