@@ -7,7 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 /**
- * Created by imamchishty on 14/04/2016.
+ *
  */
 public class BusinessExceptionTest {
 

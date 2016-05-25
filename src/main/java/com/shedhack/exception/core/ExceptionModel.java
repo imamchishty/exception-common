@@ -404,24 +404,24 @@ public class ExceptionModel {
 
     @Override
     public String toString() {
-        return "ExceptionModel{" +
-                "requestId='" + requestId + '\'' +
-                ", exceptionId='" + exceptionId + '\'' +
-                ", httpStatusDescription='" + httpStatusDescription + '\'' +
-                ", path='" + path + '\'' +
-                ", sessionId='" + sessionId + '\'' +
-                ", helpLink='" + helpLink + '\'' +
-                ", message='" + message + '\'' +
-                ", exceptionClass='" + exceptionClass + '\'' +
-                ", applicationName='" + applicationName + '\'' +
-                ", metadata='" + metadata + '\'' +
-                ", httpStatusCode=" + httpStatusCode +
-                ", params=" + params +
-                ", businessCodes=" + businessCodes +
-                ", context=" + context +
-                ", exceptionChain=" + exceptionChain +
-                ", dateTime=" + dateTime +
-                '}';
+        return "{"
+                + "\"dateTime\":" + dateTime
+                + ", \"requestId\":\"" + requestId + "\""
+                + ", \"exceptionId\":\"" + exceptionId + "\""
+                + ", \"httpStatusDescription\":\"" + httpStatusDescription + "\""
+                + ", \"path\":\"" + path + "\""
+                + ", \"sessionId\":\"" + sessionId + "\""
+                + ", \"helpLink\":\"" + helpLink + "\""
+                + ", \"message\":\"" + message + "\""
+                + ", \"exceptionClass\":\"" + exceptionClass + "\""
+                + ", \"applicationName\":\"" + applicationName + "\""
+                + ", \"metadata\":\"" + metadata + "\""
+                + ", \"httpStatusCode\":\"" + httpStatusCode + "\""
+                + ", \"params\":" + params
+                + ", \"businessCodes\":" + businessCodes
+                + ", \"context\":" + context
+                + ", \"exceptionChain\":" + exceptionChain
+                + "}";
     }
 
     @Override
