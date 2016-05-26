@@ -97,6 +97,11 @@ public class ExceptionModel {
             return this;
         }
 
+        public Builder withGroupId(String groupId) {
+            model.groupId = groupId;
+            return this;
+        }
+
         public Builder withPath(String path) {
             model.path = path;
             return this;
@@ -255,7 +260,7 @@ public class ExceptionModel {
     // Class properties
     // ----------------
 
-    private String requestId, exceptionId, httpStatusDescription,
+    private String groupId, requestId, exceptionId, httpStatusDescription,
             path, sessionId, helpLink, message, exceptionClass,
             applicationName, metadata;
 
@@ -402,10 +407,19 @@ public class ExceptionModel {
         this.context = context;
     }
 
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
     @Override
     public String toString() {
         return "{"
                 + "\"dateTime\":" + dateTime
+                + ", \"groupId\":\"" + groupId + "\""
                 + ", \"requestId\":\"" + requestId + "\""
                 + ", \"exceptionId\":\"" + exceptionId + "\""
                 + ", \"httpStatusDescription\":\"" + httpStatusDescription + "\""
