@@ -183,6 +183,11 @@ public class ExceptionModel {
             return this;
         }
 
+        public Builder withPostBody(String postBody) {
+            model.postBody = postBody;
+            return this;
+        }
+
         public Builder withContext(String key, Object value) {
             model.context.put(key, value);
             return this;
@@ -262,7 +267,7 @@ public class ExceptionModel {
 
     private String groupId, requestId, exceptionId, httpStatusDescription,
             path, sessionId, helpLink, message, exceptionClass,
-            applicationName, metadata;
+            applicationName, metadata, postBody;
 
     private int httpStatusCode;
 
@@ -391,6 +396,14 @@ public class ExceptionModel {
         this.metadata = metadata;
     }
 
+    public String getPostBody() {
+        return postBody;
+    }
+
+    public void setPostBody(String postBody) {
+        this.postBody = postBody;
+    }
+
     public String getRequestId() {
         return requestId;
     }
@@ -432,6 +445,7 @@ public class ExceptionModel {
                 + ", \"metadata\":\"" + metadata + "\""
                 + ", \"httpStatusCode\":\"" + httpStatusCode + "\""
                 + ", \"params\":" + params
+                + ", \"postBody\":" + postBody
                 + ", \"businessCodes\":" + businessCodes
                 + ", \"context\":" + context
                 + ", \"exceptionChain\":" + exceptionChain
@@ -460,6 +474,7 @@ public class ExceptionModel {
         if (applicationName != null ? !applicationName.equals(that.applicationName) : that.applicationName != null)
             return false;
         if (metadata != null ? !metadata.equals(that.metadata) : that.metadata != null) return false;
+        if (postBody != null ? !postBody.equals(that.postBody) : that.postBody != null) return false;
         if (params != null ? !params.equals(that.params) : that.params != null) return false;
         if (businessCodes != null ? !businessCodes.equals(that.businessCodes) : that.businessCodes != null)
             return false;
@@ -483,6 +498,7 @@ public class ExceptionModel {
         result = 31 * result + (exceptionClass != null ? exceptionClass.hashCode() : 0);
         result = 31 * result + (applicationName != null ? applicationName.hashCode() : 0);
         result = 31 * result + (metadata != null ? metadata.hashCode() : 0);
+        result = 31 * result + (postBody != null ? postBody.hashCode() : 0);
         result = 31 * result + httpStatusCode;
         result = 31 * result + (params != null ? params.hashCode() : 0);
         result = 31 * result + (businessCodes != null ? businessCodes.hashCode() : 0);

@@ -19,7 +19,10 @@ public class ExceptionModelTest {
         builder.withHelpLink("http://help")
                 .withHttpCode(500, "desc")
                 .withPath("/api/v1/resource")
-                .withSessionId("abcd1234").withContext("thread", "thread-name");
+                .withSessionId("abcd1234")
+                .withContext("thread", "thread-name")
+                .withPostBody("1234abcd")
+        ;
 
         // Act
         ExceptionModel model = builder.build();
@@ -46,6 +49,7 @@ public class ExceptionModelTest {
         assertEquals("ABCD12335", exception.getRequestId());
         assertTrue(model.getContext().containsKey("thread"));
         assertEquals("thread-name", model.getContext().get("thread"));
+        assertEquals("1234abcd", model.getPostBody());
     }
 
 
