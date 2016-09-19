@@ -101,7 +101,7 @@ You may have guessed that it contains several of the properties that are provide
 - __Context map__: map allowing for any other useful details.
 
 - __Request Body__: In many cases you may be required to add the original (String representation) request body. This can be added to the postBody property. In order to access this property you will require the use of another component. Please refer to [Request Body Cache Interceptor] (https://github.com/imamchishty/requestbody-cache-interceptor) and [Request Body Cache Filter](https://github.com/imamchishty/requestbody-cache-filter).
-- 
+
 ## Fluent API
 
 The example below shows how easy it is to build the ExceptionModel:
