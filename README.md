@@ -51,8 +51,6 @@ A final thing I'd add is that if you're using Spring then [thread-context-aspect
 
 - __Http status code__: At the point when an exception is thrown, developers can decide which HTTP status code is most appropriate (not mandatory).
 
-- __Request Body__: In many cases you may be required to add the original (String representation) request body. This can be added to the postBody property. In order to access this property you will require the use of another component. Please refer to [Request Body Cache Interceptor] (https://github.com/imamchishty/requestbody-cache-interceptor) and [Request Body Cache Filter](https://github.com/imamchishty/requestbody-cache-filter).
-
 ### BusinessException builder (fluent API)
 Creating a new Business Exception is very easy, especially when using the builder provided, below is an example:
 
@@ -102,6 +100,8 @@ You may have guessed that it contains several of the properties that are provide
 
 - __Context map__: map allowing for any other useful details.
 
+- __Request Body__: In many cases you may be required to add the original (String representation) request body. This can be added to the postBody property. In order to access this property you will require the use of another component. Please refer to [Request Body Cache Interceptor] (https://github.com/imamchishty/requestbody-cache-interceptor) and [Request Body Cache Filter](https://github.com/imamchishty/requestbody-cache-filter).
+- 
 ## Fluent API
 
 The example below shows how easy it is to build the ExceptionModel:
