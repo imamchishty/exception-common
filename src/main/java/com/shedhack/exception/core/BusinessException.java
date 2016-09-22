@@ -74,8 +74,13 @@ public class BusinessException extends RuntimeException {
             return this;
         }
 
-        public Builder withRequestId(String id) {
-            exception.requestId = id;
+        public Builder withSpanId(String id) {
+            exception.spanId = id;
+            return this;
+        }
+
+        public Builder withTraceId(String id) {
+            exception.spanId = id;
             return this;
         }
 
@@ -104,7 +109,7 @@ public class BusinessException extends RuntimeException {
     // Class properties
     // ----------------
 
-    private String requestId, exceptionId, correlationId;
+    private String traceId, spanId, exceptionId, correlationId;
 
     private Map<String, Object> params = new HashMap<String, Object>();
 
@@ -161,23 +166,33 @@ public class BusinessException extends RuntimeException {
         this.httpCode = httpCode;
     }
 
-    public String getRequestId() {
-        return requestId;
+    public String getSpanId() {
+        return spanId;
     }
 
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
+    public void setSpanId(String spanId) {
+        this.spanId = spanId;
+    }
+
+    public String getTraceId() {
+        return traceId;
+    }
+
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
     }
 
     @Override
     public String toString() {
-        return "BusinessException{" +
-                "requestId='" + requestId + '\'' +
-                ", exceptionId='" + exceptionId + '\'' +
-                ", correlationId='" + correlationId + '\'' +
-                ", params=" + params +
-                ", businessCodes=" + businessCodes +
-                ", httpCode=" + httpCode +
-                '}';
+        return "{\"BusinessException\":"
+                + super.toString()
+                + ", \"traceId\":\"" + traceId + "\""
+                + ", \"spanId\":\"" + spanId + "\""
+                + ", \"exceptionId\":\"" + exceptionId + "\""
+                + ", \"correlationId\":\"" + correlationId + "\""
+                + ", \"params\":" + params
+                + ", \"businessCodes\":" + businessCodes
+                + ", \"httpCode\":\"" + httpCode + "\""
+                + "}";
     }
 }

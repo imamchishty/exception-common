@@ -14,7 +14,9 @@ import java.util.regex.Pattern;
  *
  * Properties that are set include:
  *
- * - RequestId : unique HTTP request ID, this could be set by the HTTP server.
+ * - TraceId : (orginally known as GroupId) for distributed tracing.
+ * - SpanId : (originally known as RequestId) unique HTTP request ID, this could be set by the HTTP server.
+ * - ParentId : (origally known as CallerId).
  * - ExceptionId: unique exception ID, can be used to easily find the exception in logs.
  * - Session Id: HTTP session Id.
  * - ExceptionChainModel (collection) : a collection of exception chain models.
@@ -82,8 +84,8 @@ public class ExceptionModel {
                 withParams(exception.getParams());
             }
 
-            if(!Utils.isEmptyOrNull(exception.getRequestId())) {
-                withRequestId(exception.getRequestId());
+            if(!Utils.isEmptyOrNull(exception.getSpanId())) {
+                withSpanId(exception.getSpanId());
             }
         }
 
@@ -92,13 +94,13 @@ public class ExceptionModel {
             return this;
         }
 
-        public Builder withRequestId(String requestId) {
-            model.requestId = requestId;
+        public Builder withSpanId(String spanId) {
+            model.spanId = spanId;
             return this;
         }
 
-        public Builder withGroupId(String groupId) {
-            model.groupId = groupId;
+        public Builder withTraceId(String traceId) {
+            model.traceId = traceId;
             return this;
         }
 
@@ -184,7 +186,7 @@ public class ExceptionModel {
         }
 
         public Builder withPostBody(String postBody) {
-            model.postBody = postBody;
+            model.requestBody = postBody;
             return this;
         }
 
@@ -265,9 +267,9 @@ public class ExceptionModel {
     // Class properties
     // ----------------
 
-    private String groupId, requestId, exceptionId, httpStatusDescription,
+    private String traceId, spanId, exceptionId, httpStatusDescription,
             path, sessionId, helpLink, message, exceptionClass,
-            applicationName, metadata, postBody;
+            applicationName, metadata, requestBody;
 
     private int httpStatusCode;
 
@@ -396,20 +398,20 @@ public class ExceptionModel {
         this.metadata = metadata;
     }
 
-    public String getPostBody() {
-        return postBody;
+    public String getRequestBody() {
+        return requestBody;
     }
 
-    public void setPostBody(String postBody) {
-        this.postBody = postBody;
+    public void setRequestBody(String requestBody) {
+        this.requestBody = requestBody;
     }
 
-    public String getRequestId() {
-        return requestId;
+    public String getSpanId() {
+        return spanId;
     }
 
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
+    public void setSpanId(String spanId) {
+        this.spanId = spanId;
     }
 
     public Map<String, Object> getContext() {
@@ -420,20 +422,20 @@ public class ExceptionModel {
         this.context = context;
     }
 
-    public String getGroupId() {
-        return groupId;
+    public String getTraceId() {
+        return traceId;
     }
 
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
     }
 
     @Override
     public String toString() {
         return "{"
                 + "\"dateTime\":" + dateTime
-                + ", \"groupId\":\"" + groupId + "\""
-                + ", \"requestId\":\"" + requestId + "\""
+                + ", \"traceId\":\"" + traceId + "\""
+                + ", \"spanId\":\"" + spanId + "\""
                 + ", \"exceptionId\":\"" + exceptionId + "\""
                 + ", \"httpStatusDescription\":\"" + httpStatusDescription + "\""
                 + ", \"path\":\"" + path + "\""
@@ -445,7 +447,7 @@ public class ExceptionModel {
                 + ", \"metadata\":\"" + metadata + "\""
                 + ", \"httpStatusCode\":\"" + httpStatusCode + "\""
                 + ", \"params\":" + params
-                + ", \"postBody\":" + postBody
+                + ", \"requestBody\":" + requestBody
                 + ", \"businessCodes\":" + businessCodes
                 + ", \"context\":" + context
                 + ", \"exceptionChain\":" + exceptionChain
@@ -461,7 +463,7 @@ public class ExceptionModel {
         ExceptionModel that = (ExceptionModel) o;
 
         if (httpStatusCode != that.httpStatusCode) return false;
-        if (requestId != null ? !requestId.equals(that.requestId) : that.requestId != null) return false;
+        if (spanId != null ? !spanId.equals(that.spanId) : that.spanId != null) return false;
         if (exceptionId != null ? !exceptionId.equals(that.exceptionId) : that.exceptionId != null) return false;
         if (httpStatusDescription != null ? !httpStatusDescription.equals(that.httpStatusDescription) : that.httpStatusDescription != null)
             return false;
@@ -474,7 +476,7 @@ public class ExceptionModel {
         if (applicationName != null ? !applicationName.equals(that.applicationName) : that.applicationName != null)
             return false;
         if (metadata != null ? !metadata.equals(that.metadata) : that.metadata != null) return false;
-        if (postBody != null ? !postBody.equals(that.postBody) : that.postBody != null) return false;
+        if (requestBody != null ? !requestBody.equals(that.requestBody) : that.requestBody != null) return false;
         if (params != null ? !params.equals(that.params) : that.params != null) return false;
         if (businessCodes != null ? !businessCodes.equals(that.businessCodes) : that.businessCodes != null)
             return false;
@@ -488,7 +490,7 @@ public class ExceptionModel {
 
     @Override
     public int hashCode() {
-        int result = requestId != null ? requestId.hashCode() : 0;
+        int result = spanId != null ? spanId.hashCode() : 0;
         result = 31 * result + (exceptionId != null ? exceptionId.hashCode() : 0);
         result = 31 * result + (httpStatusDescription != null ? httpStatusDescription.hashCode() : 0);
         result = 31 * result + (path != null ? path.hashCode() : 0);
@@ -498,7 +500,7 @@ public class ExceptionModel {
         result = 31 * result + (exceptionClass != null ? exceptionClass.hashCode() : 0);
         result = 31 * result + (applicationName != null ? applicationName.hashCode() : 0);
         result = 31 * result + (metadata != null ? metadata.hashCode() : 0);
-        result = 31 * result + (postBody != null ? postBody.hashCode() : 0);
+        result = 31 * result + (requestBody != null ? requestBody.hashCode() : 0);
         result = 31 * result + httpStatusCode;
         result = 31 * result + (params != null ? params.hashCode() : 0);
         result = 31 * result + (businessCodes != null ? businessCodes.hashCode() : 0);

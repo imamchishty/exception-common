@@ -46,10 +46,10 @@ public class ExceptionModelTest {
         assertFalse(model.getExceptionChain().isEmpty());
         assertTrue(model.getParams().containsKey("user"));
         assertEquals(exception.getParams().get("user"), model.getParams().get("user"));
-        assertEquals("ABCD12335", exception.getRequestId());
+        assertEquals("ABCD12335", exception.getSpanId());
         assertTrue(model.getContext().containsKey("thread"));
         assertEquals("thread-name", model.getContext().get("thread"));
-        assertEquals("1234abcd", model.getPostBody());
+        assertEquals("1234abcd", model.getRequestBody());
     }
 
 
@@ -115,7 +115,7 @@ public class ExceptionModelTest {
             builder = new BusinessException.Builder(message);
         }
 
-        builder.generateId().withBusinessCode(code).withParam("user", "imam").withRequestId("ABCD12335");
+        builder.generateId().withBusinessCode(code).withParam("user", "imam").withSpanId("ABCD12335");
 
         return builder.build();
     }
