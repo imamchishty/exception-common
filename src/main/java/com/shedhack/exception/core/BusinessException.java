@@ -80,7 +80,7 @@ public class BusinessException extends RuntimeException {
         }
 
         public Builder withTraceId(String id) {
-            exception.spanId = id;
+            exception.traceId = id;
             return this;
         }
 
