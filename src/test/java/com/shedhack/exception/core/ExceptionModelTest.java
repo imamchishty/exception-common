@@ -62,7 +62,8 @@ public class ExceptionModelTest {
         builder.withHelpLink("http://help")
                 .withHttpCode(500, "desc")
                 .withPath("/api/v1/resource")
-                .withSessionId("abcd1234");
+                .withSessionId("abcd1234")
+                .withParam("someObject", new SomeObject("key", new Integer(42), new SomeChildObject("John")));
 
         // Act
         ExceptionModel model = builder.build();
@@ -124,4 +125,25 @@ public class ExceptionModelTest {
         return new IllegalArgumentException("Something went wrong here is the exception Id d99306bc-4b04-4a34-b7e7-f5554383f570");
     }
 
+    public class SomeObject {
+
+        public SomeObject(String key, Integer value, SomeChildObject childObject) {
+            this.key = key;
+            this.value = value;
+            this.child = childObject;
+        }
+
+        private String key;
+        private Integer value;
+        private SomeChildObject child;
+
+    }
+
+    public class SomeChildObject {
+        public SomeChildObject(String name) {
+            this.name = name;
+        }
+        private String name;
+
+    }
 }

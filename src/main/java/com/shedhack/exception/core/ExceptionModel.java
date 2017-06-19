@@ -1,5 +1,7 @@
 package com.shedhack.exception.core;
 
+import com.google.gson.Gson;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -430,28 +432,11 @@ public class ExceptionModel {
         this.traceId = traceId;
     }
 
+    private static Gson GSON = new Gson();
+
     @Override
     public String toString() {
-        return "{"
-                + "\"dateTime\":" + dateTime
-                + ", \"traceId\":\"" + traceId + "\""
-                + ", \"spanId\":\"" + spanId + "\""
-                + ", \"exceptionId\":\"" + exceptionId + "\""
-                + ", \"httpStatusDescription\":\"" + httpStatusDescription + "\""
-                + ", \"path\":\"" + path + "\""
-                + ", \"sessionId\":\"" + sessionId + "\""
-                + ", \"helpLink\":\"" + helpLink + "\""
-                + ", \"message\":\"" + message + "\""
-                + ", \"exceptionClass\":\"" + exceptionClass + "\""
-                + ", \"applicationName\":\"" + applicationName + "\""
-                + ", \"metadata\":\"" + metadata + "\""
-                + ", \"httpStatusCode\":\"" + httpStatusCode + "\""
-                + ", \"params\":" + params
-                + ", \"requestBody\":" + requestBody
-                + ", \"businessCodes\":" + businessCodes
-                + ", \"context\":" + context
-                + ", \"exceptionChain\":" + exceptionChain
-                + "}";
+        return GSON.toJson(this);
     }
 
     @Override
