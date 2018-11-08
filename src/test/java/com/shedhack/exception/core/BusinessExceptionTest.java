@@ -29,5 +29,7 @@ public class BusinessExceptionTest {
         assertNotNull(exception.getExceptionId());
         assertNull(exception.getCorrelationId());
         assertNull(exception.getHttpCode());
+        
+        // something
     }
 }
